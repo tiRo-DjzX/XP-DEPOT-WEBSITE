@@ -51,10 +51,10 @@
         .btn {
             display: inline-block;
             text-lg: font-semibold;
-            py-4: px-10; /* Tailwind classes for padding */
-            padding: 1rem 2.5rem; /* Explicit padding */
-            border-radius: 0.5rem; /* Tailwind rounded-lg */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Tailwind shadow-lg */
+            py-4: px-10; 
+            padding: 1rem 2.5rem; 
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .btn:hover {
@@ -62,51 +62,68 @@
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
         }
         .btn-primary {
-            background-color: #3B82F6; /* Tailwind blue-500 */
+            background-color: #3B82F6; 
             color: white;
         }
         .btn-primary:hover {
-            background-color: #2563EB; /* Tailwind blue-600 */
+            background-color: #2563EB; 
         }
         .btn-secondary {
-            background-color: #06B6D4; /* Tailwind cyan-500 */
+            background-color: #06B6D4; 
             color: white;
         }
         .btn-secondary:hover {
-            background-color: #0891B2; /* Tailwind cyan-600 */
+            background-color: #0891B2; 
         }
         .section-title {
-            /* color: #60A5FA; Tailwind blue-400 - replaced by gradient */
-            display: inline-block; /* Important for gradient text to work correctly */
+            display: inline-block; 
         }
         .navbar-sticky {
             position: sticky;
             top: 0;
             z-index: 50;
-            background-color: rgba(13, 17, 23, 0.85); /* body bg with opacity */
+            background-color: rgba(13, 17, 23, 0.85); 
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Safari */
+            -webkit-backdrop-filter: blur(10px); 
         }
         .nav-link {
             transition: color 0.3s ease, transform 0.2s ease;
-            display: inline-block; /* For transform */
+            display: inline-block; 
         }
         .nav-link:hover {
-            color: #60A5FA; /* Tailwind blue-400 */
+            color: #60A5FA; 
             transform: scale(1.1);
         }
         .command-list {
-            background-color: rgba(31, 41, 55, 0.5); /* gray-800 with opacity */
-            border: 1px solid #374151; /* Tailwind gray-700 */
+            background-color: rgba(31, 41, 55, 0.5); 
+            border: 1px solid #374151; 
         }
         .command-item {
-            border-bottom: 1px solid #374151; /* Tailwind gray-700 */
+            border-bottom: 1px solid #374151; 
         }
         .command-item:last-child {
             border-bottom: none;
         }
         .footer-link {
             transition: color 0.3s ease;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-lg */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
     </style>
 </head>
@@ -161,7 +178,9 @@
     <section id="features" class="py-16 md:py-24 section-dark">
         <div class="container mx-auto px-6 text-center"> 
             <h2 class="text-3xl md:text-4xl font-bold mb-16 section-title text-gradient">✨ Core Features ✨</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left"> <div class="feature-card p-8 rounded-xl text-center"> <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-blue-400"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left"> 
+                <div class="feature-card p-8 rounded-xl text-center"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-blue-400"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                     <h3 class="text-2xl font-semibold mb-3 text-white">XP & Leveling</h3>
                     <p class="text-gray-400">Earn XP via messages, reactions, & voice. Flaunt your rank with <code>/xp_rank_card</code>!</p>
                 </div>
@@ -187,7 +206,9 @@
     <section id="games" class="py-16 md:py-24">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-16 section-title text-gradient">🎮 A Universe of Games 🎮</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-left"> <div class="game-item p-6 rounded-lg text-center" title="Test your knowledge across various categories like Path of Exile, Valorant, Minecraft, and more!"> <span class="text-4xl mb-2 block">🧠</span><p class="text-lg font-medium">Trivia</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-left"> 
+                <div class="game-item p-6 rounded-lg text-center" title="Test your knowledge across various categories like Path of Exile, Valorant, Minecraft, and more!"> 
+                    <span class="text-4xl mb-2 block">🧠</span><p class="text-lg font-medium">Trivia</p>
                 </div>
                 <div class="game-item p-6 rounded-lg text-center" title="Classic card game. Try to beat the dealer by getting closer to 21 without going over!">
                     <span class="text-4xl mb-2 block">🃏</span><p class="text-lg font-medium">Blackjack</p>
@@ -221,13 +242,34 @@
         </div>
     </section>
 
-    <section id="commands" class="py-16 md:py-24 section-dark">
+    <section id="highlights" class="py-16 md:py-24 section-dark">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title text-gradient">🎬 XP DEPOT in Action! 🎬</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+                See some of the exciting features and fun moments with XP DEPOT!
+            </p>
+            <div class="max-w-3xl mx-auto">
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/kCqS7rbt8pE?si=_ZeWrXEdePer0Dv7?autoplay=1&mute=1" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="commands" class="py-16 md:py-24"> 
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title text-gradient">⌨️ Bot Commands ⌨️</h2>
-            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10"> XP DEPOT offers a rich set of commands for both community members and server administrators. All commands are easily accessible using Discord's slash command interface.
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10"> 
+                XP DEPOT offers a rich set of commands for both community members and server administrators. All commands are easily accessible using Discord's slash command interface.
             </p>
 
-            <div class="grid md:grid-cols-2 gap-8 text-left">
+            <div class="grid md:grid-cols-2 gap-8 text-left"> 
                 <div class="command-list p-6 rounded-lg shadow-xl">
                     <h3 class="text-2xl font-semibold mb-6 text-center text-cyan-400">For Everyone</h3>
                     <ul>
@@ -287,8 +329,9 @@
         </div>
     </section>
 
-    <section id="premium" class="py-16 md:py-24">
-        <div class="container mx-auto px-6 text-center"> <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-yellow-400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+    <section id="premium" class="py-16 md:py-24 section-dark"> 
+        <div class="container mx-auto px-6 text-center"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-yellow-400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
             <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title text-gradient">🌟 Unlock the Full Potential! 🌟</h2>
             <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
                 Support XP DEPOT's development and gain access to **all commands and features** by subscribing to our Exclusive Content tier. Enhance your server's engagement and provide an unparalleled experience for your members.
@@ -303,7 +346,7 @@
 
     <footer class="py-12 bg-gray-900 border-t border-gray-700">
         <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400">&copy; 2024-2025 XP DEPOT. All rights reserved.</p>
+            <p class="text-gray-400">© 2024-2025 XP DEPOT. All rights reserved.</p>
             <p class="text-gray-500 text-sm mt-2">
                 XP DEPOT is not affiliated with Discord Inc.
             </p>
