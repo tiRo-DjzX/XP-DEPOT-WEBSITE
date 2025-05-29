@@ -7,6 +7,7 @@
     <link rel="icon" type="image/gif" href="https://i.imgur.com/InNJNQY.gif">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -15,9 +16,6 @@
             font-family: 'Inter', sans-serif;
             background-color: #0D1117; /* Very dark gray, almost black */
             color: #E5E7EB; /* Tailwind gray-200 */
-        }
-        .hero-gradient {
-            background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%); /* Blue to Cyan */
         }
         .text-gradient {
             background: linear-gradient(135deg, #60A5FA 0%, #06B6D4 100%);
@@ -33,6 +31,7 @@
             background-color: rgba(31, 41, 55, 0.7); /* Tailwind gray-800 with opacity */
             border: 1px solid #374151; /* Tailwind gray-700 */
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer; /* Indicate interactivity for hover sound */
         }
         .feature-card:hover {
             transform: translateY(-6px) scale(1.02);
@@ -43,6 +42,7 @@
             background-color: rgba(31, 41, 55, 0.7); /* gray-800 with opacity */
             border: 1px solid #374151; /* gray-700 */
             transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer; /* Indicate interactivity for hover sound */
         }
         .game-item:hover {
             background-color: rgba(55, 65, 81, 0.8); /* gray-700 with opacity */
@@ -56,6 +56,7 @@
             border-radius: 0.5rem; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer; /* Indicate interactivity for hover sound */
         }
         .btn:hover {
             transform: scale(1.05) translateY(-2px);
@@ -89,6 +90,7 @@
         .nav-link {
             transition: color 0.3s ease, transform 0.2s ease;
             display: inline-block; 
+            cursor: pointer; /* Indicate interactivity for hover sound */
         }
         .nav-link:hover {
             color: #60A5FA; 
@@ -106,18 +108,24 @@
         }
         .footer-link {
             transition: color 0.3s ease;
+            cursor: pointer; /* Indicate interactivity for hover sound */
         }
-        .video-container {
+        .inline-video-container { 
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            width: 100%;
+            max-width: 480px; 
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
-            max-width: 100%;
             background: #000;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-lg */
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            margin-top: 1rem; 
+            margin-bottom: 1rem;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .video-container iframe {
+        .inline-video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -139,7 +147,7 @@
             </div>
     
             <div class="w-1/3 text-center">
-                <a href="#" class="text-3xl font-bold hero-gradient bg-clip-text text-transparent">
+                <a href="#" class="text-3xl font-bold text-gradient bg-clip-text text-transparent">
                     XP DEPOT
                 </a>
             </div>
@@ -153,7 +161,7 @@
         </div>
     </nav>
 
-    <header class="hero-gradient py-20 md:py-32 text-white">
+    <header class="section-dark py-20 md:py-32 text-white">
         <div class="container mx-auto px-6 text-center">
             <img src="https://i.imgur.com/InNJNQY.gif" alt="XP DEPOT Logo" class="mx-auto mb-8 rounded-full shadow-xl w-24 h-24 md:w-32 md:h-32 border-4 border-white object-cover">
             <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
@@ -175,7 +183,7 @@
         </div>
     </header>
 
-    <section id="features" class="py-16 md:py-24 section-dark">
+    <section id="features" class="py-16 md:py-24"> 
         <div class="container mx-auto px-6 text-center"> 
             <h2 class="text-3xl md:text-4xl font-bold mb-16 section-title text-gradient">✨ Core Features ✨</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left"> 
@@ -203,7 +211,7 @@
         </div>
     </section>
 
-    <section id="games" class="py-16 md:py-24">
+    <section id="games" class="py-16 md:py-24 section-dark">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-16 section-title text-gradient">🎮 A Universe of Games 🎮</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-left"> 
@@ -242,26 +250,6 @@
         </div>
     </section>
 
-    <section id="highlights" class="py-16 md:py-24 section-dark">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title text-gradient">🎬 XP DEPOT in Action! 🎬</h2>
-            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
-                See some of the exciting features and fun moments with XP DEPOT!
-            </p>
-            <div class="max-w-3xl mx-auto">
-                <div class="video-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/kCqS7rbt8pE?si=_ZeWrXEdePer0Dv7?autoplay=1&mute=1" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                </div>
-        </div>
-    </section>
-
     <section id="commands" class="py-16 md:py-24"> 
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title text-gradient">⌨️ Bot Commands ⌨️</h2>
@@ -290,7 +278,17 @@
                             <p class="text-gray-400 text-sm">❓ Shows information about all community commands, the XP system, and games.</p>
                         </li>
                         <li class="command-item py-3 text-center">
-                             <img src="https://i.imgur.com/InNJNQY.gif" alt="XP DEPOT Bot Visual" class="mx-auto mt-4 rounded-lg shadow-md max-w-xs md:max-w-sm object-cover">
+                            <div class="inline-video-container my-4">
+                                <iframe 
+                                    width="560" height="315" 
+                                    src="https://www.youtube.com/embed/kCqS7rbt8pE?si=Kw3SDPl3hTPt6LjS" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerpolicy="strict-origin-when-cross-origin" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -357,6 +355,54 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Tone.js Sound Synthesizer
+        let uiHoverSynth; // Single synth for all UI hover sounds
+        let audioInitialized = false;
+
+        // Function to initialize synth, typically after first user interaction
+        function initializeAudio() {
+            if (audioInitialized || typeof Tone === 'undefined') return;
+            
+            // Simple Sine Tick configuration
+            uiHoverSynth = new Tone.Synth({
+                oscillator: { type: 'sine' },
+                envelope: { attack: 0.001, decay: 0.05, sustain: 0.01, release: 0.05 },
+                volume: -25 // Kept it a bit quiet for UI feedback
+            }).toDestination();
+            
+            audioInitialized = true;
+            // console.log("Audio initialized by user interaction.");
+        }
+
+        // Attempt to initialize audio on first click anywhere on the page
+        document.body.addEventListener('click', initializeAudio, { once: true });
+        document.body.addEventListener('touchstart', initializeAudio, { once: true });
+
+
+        // Function to play the UI hover sound
+        function playUiHoverSound() {
+            if (audioInitialized && uiHoverSynth) {
+                // Start Tone.js audio context if not already started
+                if (Tone.context.state !== 'running') {
+                    Tone.start().catch(e => console.warn("Tone.start() failed on hover.", e));
+                }
+                uiHoverSynth.triggerAttackRelease('C6', '32n'); // Higher pitch, very short duration for a "tick"
+            } else if (!audioInitialized) {
+                // console.warn("Audio not initialized. Click page to enable hover sounds.");
+            }
+        }
+
+        // Add event listeners after DOM content is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Updated selector to include .feature-card
+            const hoverElements = document.querySelectorAll('.nav-link, .btn, .footer-link, .game-item, .feature-card');
+            hoverElements.forEach(element => {
+                element.addEventListener('mouseenter', playUiHoverSound);
+            });
+        });
+    </script>
 
 </body>
 </html>
