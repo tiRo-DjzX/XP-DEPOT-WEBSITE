@@ -50,13 +50,13 @@
         }
         .btn {
             display: inline-block;
-            text-lg: font-semibold;
-            py-4: px-10; 
-            padding: 1rem 2.5rem; 
+            font-size: 1.25rem; /* Equivalent to Tailwind's text-xl */
+            font-weight: 600;   /* Equivalent to Tailwind's font-semibold */
+            padding: 1.25rem 3rem; /* Increased padding */
             border-radius: 0.5rem; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer; /* Indicate interactivity for hover sound */
+            cursor: pointer; 
         }
         .btn:hover {
             transform: scale(1.05) translateY(-2px);
@@ -90,7 +90,7 @@
         .nav-link {
             transition: color 0.3s ease, transform 0.2s ease;
             display: inline-block; 
-            cursor: pointer; /* Indicate interactivity for hover sound */
+            cursor: pointer; 
         }
         .nav-link:hover {
             color: #60A5FA; 
@@ -99,16 +99,39 @@
         .command-list {
             background-color: rgba(31, 41, 55, 0.5); 
             border: 1px solid #374151; 
+            border-radius: 0.5rem; /* Added to parent for consistency */
         }
         .command-item {
             border-bottom: 1px solid #374151; 
+            cursor: pointer; /* Indicate interactivity for hover sound */
+            transition: background-color 0.2s ease, border-radius 0.2s ease; /* Added border-radius transition */
+            padding: 0.75rem 1rem; /* Added padding to command items for better spacing */
+        }
+        .command-item:hover {
+            background-color: rgba(55, 65, 81, 0.3); /* Slight background change on hover */
+            border-radius: 0.5rem; /* Rounded corners on hover */
         }
         .command-item:last-child {
             border-bottom: none;
         }
+        /* Ensure first and last items in the list also get rounded corners when the list itself is rounded */
+        .command-list ul > li:first-child:hover {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+        .command-list ul > li:last-child:hover {
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+        /* If the last item is also the first (only one item) */
+         .command-list ul > li:only-child:hover {
+            border-radius: 0.5rem;
+        }
+
+
         .footer-link {
             transition: color 0.3s ease;
-            cursor: pointer; /* Indicate interactivity for hover sound */
+            cursor: pointer; 
         }
         .inline-video-container { 
             position: relative;
@@ -132,6 +155,43 @@
             width: 100%;
             height: 100%;
             border: 0;
+        }
+
+        /* Logo Hover Animation Styles */
+        .logo-container {
+            position: relative; 
+            display: inline-block; 
+            cursor: pointer;
+        }
+        .logo-container .logo-image {
+            position: relative; 
+            z-index: 10;      
+        }
+        .logo-container .logo-bg-circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; 
+            opacity: 0;
+            transform: scale(0.7); 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease-out;
+            z-index: 1; 
+        }
+        .logo-container:hover .logo-bg-circle.circle-1 {
+            transform: scale(1.25); 
+            opacity: 0.25; 
+            transition-delay: 0s;
+        }
+        .logo-container:hover .logo-bg-circle.circle-2 {
+            transform: scale(1.5); 
+            opacity: 0.15; 
+            transition-delay: 0.07s; 
+        }
+        #dynamic-game-description {
+            min-height: 60px; /* Ensure space for description, adjust as needed */
+            transition: opacity 0.3s ease-in-out;
         }
     </style>
 </head>
@@ -163,7 +223,11 @@
 
     <header class="section-dark py-20 md:py-32 text-white">
         <div class="container mx-auto px-6 text-center">
-            <img src="https://i.imgur.com/InNJNQY.gif" alt="XP DEPOT Logo" class="mx-auto mb-8 rounded-full shadow-xl w-24 h-24 md:w-32 md:h-32 border-4 border-white object-cover">
+            <div class="logo-container mb-8 w-24 h-24 md:w-32 md:h-32">
+                <img src="https://i.imgur.com/InNJNQY.gif" alt="XP DEPOT Logo" class="logo-image rounded-full shadow-xl w-full h-full border-4 border-white object-cover">
+                <span class="logo-bg-circle circle-1 block" style="background-color: rgba(59, 130, 246, 0.4);"></span> 
+                <span class="logo-bg-circle circle-2 block" style="background-color: rgba(6, 182, 212, 0.3);"></span>
+            </div>
             <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
                 XP DEPOT
             </h1>
@@ -215,38 +279,39 @@
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-16 section-title text-gradient">🎮 A Universe of Games 🎮</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-left"> 
-                <div class="game-item p-6 rounded-lg text-center" title="Test your knowledge across various categories like Path of Exile, Valorant, Minecraft, and more!"> 
+                <div class="game-item p-6 rounded-lg text-center" data-description="🧠 Trivia: Challenge your knowledge! Answer questions from a wide array of gaming categories. How many can you get right?"> 
                     <span class="text-4xl mb-2 block">🧠</span><p class="text-lg font-medium">Trivia</p>
                 </div>
-                <div class="game-item p-6 rounded-lg text-center" title="Classic card game. Try to beat the dealer by getting closer to 21 without going over!">
+                <div class="game-item p-6 rounded-lg text-center" data-description="🃏 Blackjack: Hit or Stand? Aim for 21 in this classic casino card game against the house. Don't bust!">
                     <span class="text-4xl mb-2 block">🃏</span><p class="text-lg font-medium">Blackjack</p>
                 </div>
-                 <div class="game-item p-6 rounded-lg text-center" title="Engage in a thrilling game of poker against the house. Bet XP and make strategic decisions through multiple rounds.">
+                 <div class="game-item p-6 rounded-lg text-center" data-description="♠️ Texas Hold'em: Go all in! Play this popular poker variant, make your bets, and build the best hand to win XP.">
                     <span class="text-4xl mb-2 block">♠️</span><p class="text-lg font-medium">Texas Hold'em</p>
                 </div>
-                <div class="game-item p-6 rounded-lg text-center" title="A server-wide race! Click buttons to find the hidden winner. First to find it wins a burst of XP!">
+                <div class="game-item p-6 rounded-lg text-center" data-description="🔘 Button Search: Be the quickest! A grid of buttons appears, one is the winner. Click it first to earn a hefty XP reward.">
                     <span class="text-4xl mb-2 block">🔘</span><p class="text-lg font-medium">Button Search</p>
                 </div>
-                <div class="game-item p-6 rounded-lg text-center" title="Challenge a friend to this classic strategy game. Get four of your pieces in a row to win!">
+                <div class="game-item p-6 rounded-lg text-center" data-description="🔴 Connect 4: Line 'em up! Drop your pieces and try to get four in a row horizontally, vertically, or diagonally against an opponent.">
                     <span class="text-4xl mb-2 block">🔴</span><p class="text-lg font-medium">Connect 4</p>
                 </div>
-                <div class="game-item p-6 rounded-lg text-center" title="Set a secret word and let others guess letters to solve the puzzle before the hangman is complete!">
+                <div class="game-item p-6 rounded-lg text-center" data-description="🪓 Hangman: Guess the word before it's too late! One player sets a word, others guess letters to reveal it.">
                     <span class="text-4xl mb-2 block">🪓</span><p class="text-lg font-medium">Hangman</p>
                 </div>
-                <div class="game-item p-6 rounded-lg text-center" title="Test your recall! Repeat the sequence of emojis shown. Difficulty affects the XP reward.">
+                <div class="game-item p-6 rounded-lg text-center" data-description="🤔 Memory Game: Sharpen your mind! Watch the sequence of emojis and repeat it. The sequence gets longer as you succeed.">
                     <span class="text-4xl mb-2 block">🤔</span><p class="text-lg font-medium">Memory Game</p>
                 </div>
-                <div class="game-item p-6 rounded-lg text-center" title="The timeless game of chance and wits. Challenge another user and see who comes out on top!">
+                <div class="game-item p-6 rounded-lg text-center" data-description="✂️ Rock Paper Scissors: The classic duel! Choose rock, paper, or scissors against another player. May the best choice win!">
                     <span class="text-4xl mb-2 block">✂️</span><p class="text-lg font-medium">Rock Paper Scissors</p>
                 </div>
-                <div class="game-item p-6 rounded-lg text-center" title="Classic X's and O's. Challenge a friend and aim for three in a row!">
+                <div class="game-item p-6 rounded-lg text-center" data-description="✏️ Tic-Tac-Toe: Three in a row wins! Play this simple yet strategic game against a friend.">
                     <span class="text-4xl mb-2 block">✏️</span><p class="text-lg font-medium">Tic-Tac-Toe</p>
                 </div>
-                <div class="game-item p-6 rounded-lg text-center" title="And the fun doesn't stop here! More games and updates are always on the way.">
+                <div class="game-item p-6 rounded-lg text-center" data-description="➕ And More!: We're always working on new games and features to keep your server engaged. Stay tuned for updates!">
                     <span class="text-4xl mb-2 block">➕</span><p class="text-lg font-medium">And More!</p>
                 </div>
             </div>
-            <p class="text-center text-gray-400 mt-8 text-lg">Explore a wide range of trivia categories including Path of Exile, Diablo II, Escape From Tarkov, Rust, League of Legends, Valorant, PUBG, Rainbow Six Siege, GTA V, Fortnite, Counter-Strike, Minecraft, Apex Legends, and Halo 2!</p>
+            <p id="dynamic-game-description" class="text-center text-gray-400 mt-8 text-lg min-h-[3em]"> Explore a wide range of trivia categories including Path of Exile, Diablo II, Escape From Tarkov, Rust, League of Legends, Valorant, PUBG, Rainbow Six Siege, GTA V, Fortnite, Counter-Strike, Minecraft, Apex Legends, and Halo 2!
+            </p>
         </div>
     </section>
 
@@ -325,6 +390,14 @@
                             <p class="text-gray-400 text-sm">📥 Import user XP and Level data from a JSON file.</p>
                         </li>
                         <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_admin_leaderboard</code></p>
+                            <p class="text-gray-400 text-sm">🏆 Manually display the current XP leaderboard for the server.</p>
+                        </li>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_admin_ping_bot</code></p>
+                            <p class="text-gray-400 text-sm">🏓 Check the bot's current websocket latency.</p>
+                        </li>
+                        <li class="command-item py-3">
                             <p class="text-lg text-white"><code>/xp_admin_help</code></p>
                             <p class="text-gray-400 text-sm">📖 Shows detailed information about all administrator commands.</p>
                         </li>
@@ -366,48 +439,63 @@
 
     <script>
         // Tone.js Sound Synthesizer
-        let uiHoverSynth; // Single synth for all UI hover sounds
+        let uiHoverSynth; 
         let audioInitialized = false;
 
-        // Function to initialize synth, typically after first user interaction
         function initializeAudio() {
             if (audioInitialized || typeof Tone === 'undefined') return;
             
-            // Simple Sine Tick configuration
             uiHoverSynth = new Tone.Synth({
                 oscillator: { type: 'sine' },
                 envelope: { attack: 0.001, decay: 0.05, sustain: 0.01, release: 0.05 },
-                volume: -25 // Kept it a bit quiet for UI feedback
+                volume: -25 
             }).toDestination();
             
             audioInitialized = true;
-            // console.log("Audio initialized by user interaction.");
         }
 
-        // Attempt to initialize audio on first click anywhere on the page
         document.body.addEventListener('click', initializeAudio, { once: true });
         document.body.addEventListener('touchstart', initializeAudio, { once: true });
 
-
-        // Function to play the UI hover sound
         function playUiHoverSound() {
             if (audioInitialized && uiHoverSynth) {
-                // Start Tone.js audio context if not already started
                 if (Tone.context.state !== 'running') {
                     Tone.start().catch(e => console.warn("Tone.start() failed on hover.", e));
                 }
-                uiHoverSynth.triggerAttackRelease('C6', '32n'); // Higher pitch, very short duration for a "tick"
-            } else if (!audioInitialized) {
-                // console.warn("Audio not initialized. Click page to enable hover sounds.");
+                uiHoverSynth.triggerAttackRelease('C6', '32n'); 
             }
         }
 
-        // Add event listeners after DOM content is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            // Updated selector to include .feature-card
-            const hoverElements = document.querySelectorAll('.nav-link, .btn, .footer-link, .game-item, .feature-card');
+            // Updated selector to include .command-item
+            const hoverElements = document.querySelectorAll('.nav-link, .btn, .footer-link, .game-item, .feature-card, .command-item');
             hoverElements.forEach(element => {
                 element.addEventListener('mouseenter', playUiHoverSound);
+            });
+
+            // Dynamic Game Description Logic
+            const gameDescriptionElement = document.getElementById('dynamic-game-description');
+            const originalGameDescriptionText = gameDescriptionElement.textContent;
+            const gameItems = document.querySelectorAll('.game-item');
+
+            gameItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    const description = item.getAttribute('data-description');
+                    if (description) {
+                        gameDescriptionElement.style.opacity = 0; // Start fade out
+                        setTimeout(() => {
+                            gameDescriptionElement.textContent = description;
+                            gameDescriptionElement.style.opacity = 1; // Fade in
+                        }, 150); // Half of the transition duration
+                    }
+                });
+                item.addEventListener('mouseleave', () => {
+                    gameDescriptionElement.style.opacity = 0; // Start fade out
+                     setTimeout(() => {
+                        gameDescriptionElement.textContent = originalGameDescriptionText;
+                        gameDescriptionElement.style.opacity = 1; // Fade in
+                    }, 150);
+                });
             });
         });
     </script>
