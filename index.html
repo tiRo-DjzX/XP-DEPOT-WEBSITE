@@ -99,22 +99,46 @@
         .command-list {
             background-color: rgba(31, 41, 55, 0.5); 
             border: 1px solid #374151; 
-            border-radius: 0.5rem; /* Added to parent for consistency */
+            border-radius: 0.5rem; 
         }
         .command-item {
             border-bottom: 1px solid #374151; 
-            cursor: pointer; /* Indicate interactivity for hover sound */
-            transition: background-color 0.2s ease, border-radius 0.2s ease; /* Added border-radius transition */
-            padding: 0.75rem 1rem; /* Added padding to command items for better spacing */
+            cursor: pointer; 
+            transition: background-color 0.2s ease, border-radius 0.2s ease; 
+            padding: 0.75rem 1rem; 
         }
+        /* Default styles for command name paragraph and its code */
+        .command-item > p:first-child { /* This is the <p class="text-lg text-white"> */
+            /* text-white class from Tailwind handles default color */
+            transition: color 0.2s ease; 
+        }
+        .command-item > p:first-child code {
+            /* color will be inherited from parent p */
+        }
+        /* Default styles for description paragraph */
+        .command-item > p.text-gray-400 { /* This is the <p class="text-gray-400 text-sm"> */
+            /* text-gray-400 class from Tailwind handles default color */
+            transition: color 0.2s ease; 
+        }
+
+        /* Hover state for the entire command item */
         .command-item:hover {
-            background-color: rgba(55, 65, 81, 0.3); /* Slight background change on hover */
-            border-radius: 0.5rem; /* Rounded corners on hover */
+            background-color: #000000; /* Black background */
+            border-radius: 0.5rem;
         }
+        /* Hover state for command name paragraph and its code child */
+        .command-item:hover > p:first-child,
+        .command-item:hover > p:first-child code {
+            color: #EF4444; /* Red text (Tailwind red-500) */
+        }
+        /* Hover state for description paragraph */
+        .command-item:hover > p.text-gray-400 {
+            color: #FFFFFF; /* White text */
+        }
+
         .command-item:last-child {
             border-bottom: none;
         }
-        /* Ensure first and last items in the list also get rounded corners when the list itself is rounded */
         .command-list ul > li:first-child:hover {
             border-top-left-radius: 0.5rem;
             border-top-right-radius: 0.5rem;
@@ -123,11 +147,9 @@
             border-bottom-left-radius: 0.5rem;
             border-bottom-right-radius: 0.5rem;
         }
-        /* If the last item is also the first (only one item) */
          .command-list ul > li:only-child:hover {
             border-radius: 0.5rem;
         }
-
 
         .footer-link {
             transition: color 0.3s ease;
@@ -190,7 +212,7 @@
             transition-delay: 0.07s; 
         }
         #dynamic-game-description {
-            min-height: 60px; /* Ensure space for description, adjust as needed */
+            min-height: 60px; 
             transition: opacity 0.3s ease-in-out;
         }
     </style>
@@ -475,28 +497,30 @@
 
             // Dynamic Game Description Logic
             const gameDescriptionElement = document.getElementById('dynamic-game-description');
-            const originalGameDescriptionText = gameDescriptionElement.textContent;
-            const gameItems = document.querySelectorAll('.game-item');
+            if (gameDescriptionElement) { // Check if element exists
+                const originalGameDescriptionText = gameDescriptionElement.textContent;
+                const gameItems = document.querySelectorAll('.game-item');
 
-            gameItems.forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    const description = item.getAttribute('data-description');
-                    if (description) {
+                gameItems.forEach(item => {
+                    item.addEventListener('mouseenter', () => {
+                        const description = item.getAttribute('data-description');
+                        if (description) {
+                            gameDescriptionElement.style.opacity = 0; // Start fade out
+                            setTimeout(() => {
+                                gameDescriptionElement.textContent = description;
+                                gameDescriptionElement.style.opacity = 1; // Fade in
+                            }, 150); // Half of the transition duration
+                        }
+                    });
+                    item.addEventListener('mouseleave', () => {
                         gameDescriptionElement.style.opacity = 0; // Start fade out
                         setTimeout(() => {
-                            gameDescriptionElement.textContent = description;
+                            gameDescriptionElement.textContent = originalGameDescriptionText;
                             gameDescriptionElement.style.opacity = 1; // Fade in
-                        }, 150); // Half of the transition duration
-                    }
+                        }, 150);
+                    });
                 });
-                item.addEventListener('mouseleave', () => {
-                    gameDescriptionElement.style.opacity = 0; // Start fade out
-                     setTimeout(() => {
-                        gameDescriptionElement.textContent = originalGameDescriptionText;
-                        gameDescriptionElement.style.opacity = 1; // Fade in
-                    }, 150);
-                });
-            });
+            }
         });
     </script>
 
