@@ -87,17 +87,17 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px); 
         }
-        .nav-link, #brand-name-nav { /* Added #brand-name-nav here */
+        .nav-link, #brand-name-nav { 
             transition: color 0.3s ease, transform 0.2s ease;
             display: inline-block; 
             cursor: pointer; 
         }
-        .nav-link:hover, #brand-name-nav:hover { /* Added #brand-name-nav here */
+        .nav-link:hover, #brand-name-nav:hover { 
             color: #60A5FA; 
             transform: scale(1.1);
         }
-        #brand-name-nav:hover { /* Specific hover for brand name to keep gradient */
-             color: transparent; /* Keep text-gradient visible */
+        #brand-name-nav:hover { 
+             color: transparent; 
         }
         .command-list {
             background-color: rgba(31, 41, 55, 0.5); 
@@ -249,28 +249,29 @@
 
     <header class="section-dark py-20 md:py-32 text-white">
         <div class="container mx-auto px-6 text-center">
-            <div class="logo-container mb-8 w-24 h-24 md:w-32 md:h-32">
-                <img src="https://i.imgur.com/InNJNQY.gif" alt="XP DEPOT Logo" class="logo-image rounded-full shadow-xl w-full h-full border-4 border-white object-cover">
-                <span class="logo-bg-circle circle-1 block" style="background-color: rgba(59, 130, 246, 0.4);"></span> 
-                <span class="logo-bg-circle circle-2 block" style="background-color: rgba(6, 182, 212, 0.3);"></span>
+            <div class="flex justify-center items-center mb-6 space-x-4 md:space-x-8">
+                <a href="https://discord.com/oauth2/authorize?client_id=1359675071853232128&scope=bot+applications.commands&permissions=277025778752" target="_blank" rel="noopener noreferrer"
+                   class="btn btn-primary">
+                    ➕ Add XP DEPOT
+                </a>
+                <div class="logo-container w-24 h-24 md:w-32 md:h-32"> 
+                    <img src="https://i.imgur.com/InNJNQY.gif" alt="XP DEPOT Logo" class="logo-image rounded-full shadow-xl w-full h-full border-4 border-white object-cover">
+                    <span class="logo-bg-circle circle-1 block" style="background-color: rgba(59, 130, 246, 0.4);"></span> 
+                    <span class="logo-bg-circle circle-2 block" style="background-color: rgba(6, 182, 212, 0.3);"></span>
+                </div>
+                <a href="https://discord.gg/QXU8x5DUBn" target="_blank" rel="noopener noreferrer"
+                   class="btn btn-secondary">
+                    🤝 Join Discord
+                </a>
             </div>
+
             <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
                 XP DEPOT
             </h1>
             <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto font-light">
                 Level Up Your Discord Server! 🚀 Engaging XP, Exciting Games, and Automated Fun.
             </p>
-            <div class="space-y-4 md:space-y-0 md:space-x-6">
-                <a href="https://discord.com/oauth2/authorize?client_id=1359675071853232128&scope=bot+applications.commands&permissions=277025778752" target="_blank" rel="noopener noreferrer"
-                   class="btn btn-primary">
-                    ➕ Add XP DEPOT
-                </a>
-                <a href="https://discord.gg/QXU8x5DUBn" target="_blank" rel="noopener noreferrer"
-                   class="btn btn-secondary">
-                    🤝 Join Support/Test Server
-                </a>
             </div>
-        </div>
     </header>
 
     <section id="features" class="py-16 md:py-24"> 
@@ -468,7 +469,7 @@
         let uiHoverSynth; 
         let audioInitialized = false;
         let brandNameElement;
-        let originalBrandNameText = "XP DEPOT"; // Default original text
+        let originalBrandNameText = "XP DEPOT"; 
 
         function initializeAudio() {
             if (audioInitialized || typeof Tone === 'undefined') return;
@@ -495,15 +496,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const hoverElements = document.querySelectorAll('.nav-link, .btn, .footer-link, .game-item, .feature-card, .command-item, #brand-name-nav');
+            const hoverElements = document.querySelectorAll('.nav-link, .btn, .footer-link, .game-item, .feature-card, .command-item, #brand-name-nav, .logo-container'); 
             hoverElements.forEach(element => {
                 element.addEventListener('mouseenter', playUiHoverSound);
             });
 
-            // Brand name hover text change
             brandNameElement = document.getElementById('brand-name-nav');
             if (brandNameElement) {
-                originalBrandNameText = brandNameElement.textContent.trim(); // Store original text
+                originalBrandNameText = brandNameElement.textContent.trim(); 
                 brandNameElement.addEventListener('mouseenter', () => {
                     brandNameElement.textContent = "+ + + XP DEPOT + + +";
                 });
@@ -512,8 +512,6 @@
                 });
             }
 
-
-            // Dynamic Game Description & Glow Logic
             const gameDescriptionElement = document.getElementById('dynamic-game-description');
             if (gameDescriptionElement) { 
                 const originalGameDescriptionText = gameDescriptionElement.textContent;
@@ -521,7 +519,6 @@
 
                 gameItems.forEach(item => {
                     item.addEventListener('mouseenter', () => {
-                        // Update description
                         const description = item.getAttribute('data-description');
                         if (description) {
                             gameDescriptionElement.style.opacity = 0; 
@@ -530,20 +527,17 @@
                                 gameDescriptionElement.style.opacity = 1; 
                             }, 150); 
                         }
-                        // Apply glow
                         const glowColor = item.getAttribute('data-glow-color');
                         if (glowColor) {
                             item.style.boxShadow = `0 0 15px 5px ${glowColor}, 0 0 5px 1px ${glowColor.replace(/,\s*\d?\.?\d+\)$/, ', 0.3)')}`; 
                         }
                     });
                     item.addEventListener('mouseleave', () => {
-                        // Revert description
                         gameDescriptionElement.style.opacity = 0; 
                         setTimeout(() => {
                             gameDescriptionElement.textContent = originalGameDescriptionText;
                             gameDescriptionElement.style.opacity = 1; 
                         }, 150);
-                        // Remove glow
                         item.style.boxShadow = ''; 
                     });
                 });
