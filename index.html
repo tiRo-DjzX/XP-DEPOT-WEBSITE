@@ -4,53 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XP DEPOT - Level Up Your Discord Server!</title>
+    <link rel="icon" type="image/gif" href="https://i.imgur.com/InNJNQY.gif">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Tailwind gray-900 */
+            background-color: #0D1117; /* Very dark gray, almost black */
             color: #E5E7EB; /* Tailwind gray-200 */
         }
         .hero-gradient {
-            background: linear-gradient(135deg, #3B82F6 0%, #EC4899 100%);
+            background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%); /* Blue to Cyan */
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #60A5FA 0%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .section-dark {
+            background-color: #161B22; /* Darker section background */
         }
         .feature-card {
-            background-color: #1F2937; /* Tailwind gray-800 */
+            background-color: rgba(31, 41, 55, 0.7); /* Tailwind gray-800 with opacity */
             border: 1px solid #374151; /* Tailwind gray-700 */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.2);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 20px -4px rgba(59, 130, 246, 0.35), 0 5px 8px -3px rgba(59, 130, 246, 0.25);
+            border-color: #60A5FA;
+        }
+        .game-item {
+            background-color: rgba(31, 41, 55, 0.7); /* gray-800 with opacity */
+            border: 1px solid #374151; /* gray-700 */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .game-item:hover {
+            background-color: rgba(55, 65, 81, 0.8); /* gray-700 with opacity */
+            transform: scale(1.05);
+        }
+        .btn {
+            display: inline-block;
+            text-lg: font-semibold;
+            py-4: px-10; /* Tailwind classes for padding */
+            padding: 1rem 2.5rem; /* Explicit padding */
+            border-radius: 0.5rem; /* Tailwind rounded-lg */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Tailwind shadow-lg */
+            transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
         }
         .btn-primary {
             background-color: #3B82F6; /* Tailwind blue-500 */
             color: white;
-            transition: background-color 0.3s ease;
         }
         .btn-primary:hover {
             background-color: #2563EB; /* Tailwind blue-600 */
         }
         .btn-secondary {
-            background-color: #EC4899; /* Tailwind pink-500 */
+            background-color: #06B6D4; /* Tailwind cyan-500 */
             color: white;
-            transition: background-color 0.3s ease;
         }
         .btn-secondary:hover {
-            background-color: #DB2777; /* Tailwind pink-600 */
+            background-color: #0891B2; /* Tailwind cyan-600 */
         }
         .section-title {
-            color: #60A5FA; /* Tailwind blue-400 */
+            /* color: #60A5FA; Tailwind blue-400 - replaced by gradient */
+            display: inline-block; /* Important for gradient text to work correctly */
         }
         .navbar-sticky {
             position: sticky;
             top: 0;
             z-index: 50;
-            background-color: rgba(17, 24, 39, 0.85); /* gray-900 with opacity */
+            background-color: rgba(13, 17, 23, 0.85); /* body bg with opacity */
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari */
         }
-        /* Lucide Icons SVGs will be inlined */
+        .nav-link {
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block; /* For transform */
+        }
+        .nav-link:hover {
+            color: #60A5FA; /* Tailwind blue-400 */
+            transform: scale(1.1);
+        }
+        .command-list {
+            background-color: rgba(31, 41, 55, 0.5); /* gray-800 with opacity */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+        }
+        .command-item {
+            border-bottom: 1px solid #374151; /* Tailwind gray-700 */
+        }
+        .command-item:last-child {
+            border-bottom: none;
+        }
+        .footer-link {
+            transition: color 0.3s ease;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -58,62 +115,62 @@
     <nav class="navbar-sticky py-4 shadow-lg">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <a href="#" class="text-3xl font-bold hero-gradient bg-clip-text text-transparent">
-                XP DEPOT
+                XP DEPOT 🤖
             </a>
             <div class="space-x-6 text-lg">
-                <a href="#features" class="hover:text-blue-400 transition-colors">Features</a>
-                <a href="#games" class="hover:text-blue-400 transition-colors">Games</a>
-                <a href="#commands" class="hover:text-blue-400 transition-colors">Commands</a>
-                <a href="#premium" class="hover:text-blue-400 transition-colors">Premium</a>
+                <a href="#features" class="nav-link">✨ Features</a>
+                <a href="#games" class="nav-link">🎮 Games</a>
+                <a href="#commands" class="nav-link">⌨️ Commands</a>
+                <a href="#premium" class="nav-link">🌟 Premium</a>
             </div>
         </div>
     </nav>
 
     <header class="hero-gradient py-20 md:py-32 text-white">
         <div class="container mx-auto px-6 text-center">
-            <img src="https://imgur.com/CWmCcEc" alt="XP DEPOT Logo" class="mx-auto mb-8 rounded-full shadow-xl w-24 h-24 md:w-32 md:h-32 border-4 border-white">
+            <img src="https://i.imgur.com/InNJNQY.gif" alt="XP DEPOT Logo" class="mx-auto mb-8 rounded-full shadow-xl w-24 h-24 md:w-32 md:h-32 border-4 border-white object-cover">
             <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                XP DEPOT
+                XP DEPOT 🤖
             </h1>
             <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto font-light">
-                Level Up Your Discord Server! Engaging XP, Exciting Games, and Automated Fun.
+                Level Up Your Discord Server! 🚀 Engaging XP, Exciting Games, and Automated Fun.
             </p>
             <div class="space-y-4 md:space-y-0 md:space-x-6">
                 <a href="https://discord.com/oauth2/authorize?client_id=1359675071853232128&scope=bot+applications.commands&permissions=277025778752" target="_blank" rel="noopener noreferrer"
-                   class="btn-primary inline-block text-lg font-semibold py-4 px-10 rounded-lg shadow-lg transform hover:scale-105">
-                    Add XP DEPOT to Your Server
+                   class="btn btn-primary">
+                    ➕ Add XP DEPOT
                 </a>
                 <a href="https://discord.gg/QXU8x5DUBn" target="_blank" rel="noopener noreferrer"
-                   class="btn-secondary inline-block text-lg font-semibold py-4 px-10 rounded-lg shadow-lg transform hover:scale-105">
-                    Join Support Server
+                   class="btn btn-secondary">
+                    🤝 Join Support
                 </a>
             </div>
         </div>
     </header>
 
-    <section id="features" class="py-16 md:py-24 bg-gray-800">
+    <section id="features" class="py-16 md:py-24 section-dark">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">Core Features</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title text-gradient">✨ Core Features ✨</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="feature-card p-8 rounded-xl text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-blue-400"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                     <h3 class="text-2xl font-semibold mb-3 text-white">XP & Leveling</h3>
-                    <p class="text-gray-400">Earn XP through messages, reactions, & voice activity. Level up and show off your rank with <code>/xp_rank_card</code>!</p>
+                    <p class="text-gray-400">Earn XP via messages, reactions, & voice. Flaunt your rank with <code>/xp_rank_card</code>!</p>
                 </div>
                 <div class="feature-card p-8 rounded-xl text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-pink-400"><line x1="6" y1="11" x2="10" y2="11"></line><line x1="8" y1="9" x2="8" y2="13"></line><line x1="14" y1="11" x2="18" y2="11"></line><line x1="16" y1="9" x2="16" y2="13"></line><path d="M17.33 17.67A2 2 0 0 1 15.33 19H8.67a2 2 0 0 1-2-1.33L5 14H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1"></path><path d="M22 12v3a2 2 0 0 1-2 2h-1l-1.67-3.33a2 2 0 0 1 2-1.33H19a2 2 0 0 1 2 2Z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-cyan-400"><path d="M17.33 17.67A2 2 0 0 1 15.33 19H8.67a2 2 0 0 1-2-1.33L5 14H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1"/><path d="M22 12v3a2 2 0 0 1-2 2h-1l-1.67-3.33a2 2 0 0 1 2-1.33H19a2 2 0 0 1 2 2Z"/><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="14" y1="11" x2="18" y2="11"/><line x1="16" y1="9" x2="16" y2="13"/></svg>
                     <h3 class="text-2xl font-semibold mb-3 text-white">Exciting Games</h3>
-                    <p class="text-gray-400">Play Trivia, Blackjack, Connect 4, Hangman, and many more to earn XP and compete with friends!</p>
+                    <p class="text-gray-400">Play Trivia, Blackjack, Connect 4, Hangman & more. Earn XP and compete!</p>
                 </div>
                 <div class="feature-card p-8 rounded-xl text-center">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-green-400"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-green-400"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73 2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                     <h3 class="text-2xl font-semibold mb-3 text-white">Automated Fun</h3>
-                    <p class="text-gray-400">Keep your server lively with automated daily leaderboards, trivia games, and XP boost giveaways.</p>
+                    <p class="text-gray-400">Daily leaderboards, trivia, & XP boost giveaways to keep your server buzzing!</p>
                 </div>
                 <div class="feature-card p-8 rounded-xl text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-yellow-400"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                     <h3 class="text-2xl font-semibold mb-3 text-white">Premium Experience</h3>
-                    <p class="text-gray-400">Unlock all commands and features with our exclusive content subscription. Get the full XP DEPOT experience!</p>
+                    <p class="text-gray-400">Unlock all commands with our exclusive subscription. Elevate your server!</p>
                 </div>
             </div>
         </div>
@@ -121,34 +178,36 @@
 
     <section id="games" class="py-16 md:py-24">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">A Universe of Games</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title text-gradient">🎮 A Universe of Games 🎮</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                <div class="game-item p-6 rounded-lg" title="Test your knowledge across various categories like Path of Exile, Valorant, Minecraft, and more!">
                     <span class="text-4xl mb-2 block">🧠</span><p class="text-lg font-medium">Trivia</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                <div class="game-item p-6 rounded-lg" title="Classic card game. Try to beat the dealer by getting closer to 21 without going over!">
                     <span class="text-4xl mb-2 block">🃏</span><p class="text-lg font-medium">Blackjack</p>
                 </div>
-                 <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                 <div class="game-item p-6 rounded-lg" title="Engage in a thrilling game of poker against the house. Bet XP and make strategic decisions through multiple rounds.">
                     <span class="text-4xl mb-2 block">♠️</span><p class="text-lg font-medium">Texas Hold'em</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                <div class="game-item p-6 rounded-lg" title="A server-wide race! Click buttons to find the hidden winner. First to find it wins a burst of XP!">
                     <span class="text-4xl mb-2 block">🔘</span><p class="text-lg font-medium">Button Search</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                <div class="game-item p-6 rounded-lg" title="Challenge a friend to this classic strategy game. Get four of your pieces in a row to win!">
                     <span class="text-4xl mb-2 block">🔴</span><p class="text-lg font-medium">Connect 4</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
-                    <span class="text-4xl mb-2 block">🪓</span><p class="text-lg font-medium">Hangman</p> </div>
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                <div class="game-item p-6 rounded-lg" title="Set a secret word and let others guess letters to solve the puzzle before the hangman is complete!">
+                    <span class="text-4xl mb-2 block">🪓</span><p class="text-lg font-medium">Hangman</p>
+                </div>
+                <div class="game-item p-6 rounded-lg" title="Test your recall! Repeat the sequence of emojis shown. Difficulty affects the XP reward.">
                     <span class="text-4xl mb-2 block">🤔</span><p class="text-lg font-medium">Memory Game</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                <div class="game-item p-6 rounded-lg" title="The timeless game of chance and wits. Challenge another user and see who comes out on top!">
                     <span class="text-4xl mb-2 block">✂️</span><p class="text-lg font-medium">Rock Paper Scissors</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
-                    <span class="text-4xl mb-2 block">✏️</span><p class="text-lg font-medium">Tic-Tac-Toe</p> </div>
-                <div class="p-6 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                <div class="game-item p-6 rounded-lg" title="Classic X's and O's. Challenge a friend and aim for three in a row!">
+                    <span class="text-4xl mb-2 block">✏️</span><p class="text-lg font-medium">Tic-Tac-Toe</p>
+                </div>
+                <div class="game-item p-6 rounded-lg" title="And the fun doesn't stop here! More games and updates are always on the way.">
                     <span class="text-4xl mb-2 block">➕</span><p class="text-lg font-medium">And More!</p>
                 </div>
             </div>
@@ -156,29 +215,79 @@
         </div>
     </section>
 
-    <section id="commands" class="py-16 md:py-24 bg-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title">Easy to Use Commands</h2>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-6">
-                XP DEPOT is designed with simplicity in mind. Get started quickly and explore all features with intuitive slash commands.
+    <section id="commands" class="py-16 md:py-24 section-dark">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title text-gradient">⌨️ Bot Commands ⌨️</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10 text-center">
+                XP DEPOT offers a rich set of commands for both community members and server administrators. All commands are easily accessible using Discord's slash command interface.
             </p>
-            <div class="bg-gray-700 p-6 rounded-lg inline-block shadow-md">
-                <p class="text-lg text-white">Discover all user commands with <code>/xp_help</code></p>
-                <p class="text-lg text-white mt-2">Server administrators can find advanced controls with <code>/xp_admin_help</code></p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="command-list p-6 rounded-lg shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-6 text-center text-cyan-400">For Everyone</h3>
+                    <ul>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_rank_card</code></p>
+                            <p class="text-gray-400 text-sm">📊 Displays your current XP, level, and server rank.</p>
+                        </li>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_shop [view|buy|gift]</code></p>
+                            <p class="text-gray-400 text-sm">🛒 Access the XP Boost shop to view, purchase, or gift boosts.</p>
+                        </li>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_game_[game_name]</code></p>
+                            <p class="text-gray-400 text-sm">🎮 Start one of our many exciting games like Trivia, Blackjack, etc.</p>
+                        </li>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_help</code></p>
+                            <p class="text-gray-400 text-sm">❓ Shows information about all community commands, the XP system, and games.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="command-list p-6 rounded-lg shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-6 text-center text-blue-400">For Administrators</h3>
+                    <ul>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_admin_settings</code></p>
+                            <p class="text-gray-400 text-sm">⚙️ Displays all current XP system settings for the server.</p>
+                        </li>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_admin_channel_[type]</code></p>
+                            <p class="text-gray-400 text-sm">📢 Sets specific channels for level-ups, game wins, boosts, leaderboards, and trivia.</p>
+                        </li>
+                         <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_admin_user_add</code> / <code>_update</code></p>
+                            <p class="text-gray-400 text-sm">👤 Manually add, or update and sync user data in the XP system.</p>
+                        </li>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_admin_auto_[feature]</code></p>
+                            <p class="text-gray-400 text-sm">🤖 Enable/disable automated daily leaderboards or auto-adding new users.</p>
+                        </li>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_admin_trivia_scheduler</code></p>
+                            <p class="text-gray-400 text-sm">🗓️ Configure the automated trivia game schedule and categories.</p>
+                        </li>
+                        <li class="command-item py-3">
+                            <p class="text-lg text-white"><code>/xp_admin_help</code></p>
+                            <p class="text-gray-400 text-sm">📖 Shows detailed information about all administrator commands.</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <p class="text-gray-400 mt-6">All commands are easily accessible directly in your Discord server!</p>
+             <p class="text-gray-500 mt-10 text-center">This is just a glimpse! Use the in-Discord help commands for a full list and details.</p>
         </div>
     </section>
 
     <section id="premium" class="py-16 md:py-24">
         <div class="container mx-auto px-6 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-yellow-400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title">Unlock the Full Potential!</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title text-gradient">🌟 Unlock the Full Potential! 🌟</h2>
             <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
                 Support XP DEPOT's development and gain access to **all commands and features** by subscribing to our Exclusive Content tier. Enhance your server's engagement and provide an unparalleled experience for your members.
             </p>
             <a href="https://discord.com/application-directory/1359675071853232128" target="_blank" rel="noopener noreferrer"
-               class="btn-primary inline-block text-lg font-semibold py-4 px-10 rounded-lg shadow-lg transform hover:scale-105">
+               class="btn btn-primary">
                 Visit Our Discord Store Page
             </a>
              <p class="text-gray-500 mt-4 text-sm">Note: Bot commands are locked on servers without an active subscription.</p>
@@ -192,9 +301,9 @@
                 XP DEPOT is not affiliated with Discord Inc.
             </p>
             <div class="mt-4 space-x-6">
-                <a href="https://discord.gg/QXU8x5DUBn" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">Support Server</a>
+                <a href="https://discord.gg/QXU8x5DUBn" target="_blank" rel="noopener noreferrer" class="footer-link text-blue-400 hover:text-blue-300">Support Server</a>
                 <span class="text-gray-600">|</span>
-                <a href="https://discord.com/application-directory/1359675071853232128" target="_blank" rel="noopener noreferrer" class="text-pink-400 hover:text-pink-300">Store Page</a>
+                <a href="https://discord.com/application-directory/1359675071853232128" target="_blank" rel="noopener noreferrer" class="footer-link text-cyan-400 hover:text-cyan-300">Store Page</a>
             </div>
         </div>
     </footer>
