@@ -108,7 +108,7 @@
             transition: color 0.3s ease, transform 0.2s ease;
             display: inline-block; 
             cursor: pointer; 
-            padding: 0.5rem 0; /* Added padding for better touch targets on mobile */
+            padding: 0.5rem 0; 
         }
         .nav-link:hover { 
             color: #60A5FA; 
@@ -121,7 +121,7 @@
             height: 3px;
             margin: 5px auto;
             transition: all 0.3s ease-in-out;
-            background-color: #E5E7EB; /* Tailwind gray-200 */
+            background-color: #E5E7EB; 
         }
         .mobile-menu-button.open span:nth-child(1) {
             transform: translateY(8px) rotate(45deg);
@@ -132,12 +132,11 @@
         .mobile-menu-button.open span:nth-child(3) {
             transform: translateY(-8px) rotate(-45deg);
         }
-        /* Ensuring mobile nav links are block and centered */
         #mobile-nav-links a {
             display: block;
             text-align: center;
-            padding: 0.75rem 1rem; /* py-3 px-4 */
-            border-bottom: 1px solid #374151; /* border-gray-700 */
+            padding: 0.75rem 1rem; 
+            border-bottom: 1px solid #374151; 
         }
          #mobile-nav-links a:last-child {
             border-bottom: none;
@@ -385,7 +384,7 @@
             <h2 class="text-3xl md:text-4xl font-bold mb-16 section-title text-gradient">🎮 A Universe of Games 🎮</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-left"> 
                 <div class="game-item p-6 rounded-lg text-center" data-description="🧠 Trivia: Challenge your knowledge! Answer questions from a wide array of gaming categories. How many can you get right?" data-glow-color="rgba(168, 85, 247, 0.4)"> 
-                    <span class="text-4xl mb-2 block">🧠</span><p class="text-lg font-medium">Trivia</p>
+                    <span class="text-4xl mb-2 block">🧠</span><p class="text-lg font-medium">Trivia (Automated)</p>
                 </div>
                 <div class="game-item p-6 rounded-lg text-center" data-description="🃏 Blackjack: Hit or Stand? Aim for 21 in this classic casino card game against the house. Don't bust!" data-glow-color="rgba(202, 138, 4, 0.4)">
                     <span class="text-4xl mb-2 block">🃏</span><p class="text-lg font-medium">Blackjack</p>
@@ -623,7 +622,6 @@
             // Mobile Menu Toggle
             const mobileMenuButton = document.getElementById('mobile-menu-toggler');
             const mobileNavLinks = document.getElementById('mobile-nav-links');
-            // const desktopNavLinks = document.getElementById('desktop-nav-links'); // Not needed for this centering logic
 
             if (mobileMenuButton && mobileNavLinks) {
                 mobileMenuButton.addEventListener('click', () => {
