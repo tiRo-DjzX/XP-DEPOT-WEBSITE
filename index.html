@@ -108,11 +108,41 @@
             transition: color 0.3s ease, transform 0.2s ease;
             display: inline-block; 
             cursor: pointer; 
+            padding: 0.5rem 0; /* Added padding for better touch targets on mobile */
         }
         .nav-link:hover { 
             color: #60A5FA; 
             transform: scale(1.1);
         }
+        /* Mobile Menu Styles */
+        .mobile-menu-button span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: #E5E7EB; /* Tailwind gray-200 */
+        }
+        .mobile-menu-button.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .mobile-menu-button.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu-button.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        /* Ensuring mobile nav links are block and centered */
+        #mobile-nav-links a {
+            display: block;
+            text-align: center;
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            border-bottom: 1px solid #374151; /* border-gray-700 */
+        }
+         #mobile-nav-links a:last-child {
+            border-bottom: none;
+        }
+
 
         .command-list {
             background-color: rgba(31, 41, 55, 0.5); 
@@ -238,21 +268,41 @@
 </head>
 <body class="antialiased">
 
+    <!-- Navigation Bar -->
     <nav class="navbar-sticky py-4 shadow-lg">
-        <div class="container mx-auto px-6 flex items-center justify-center">
-            <div class="flex space-x-4 md:space-x-6 text-lg">
+        <!-- Container for both desktop and mobile menu button -->
+        <div class="container mx-auto px-6 flex md:justify-center justify-end items-center">
+            <!-- Desktop Navigation Links (Centered on md and up) -->
+            <div class="hidden md:flex space-x-4 md:space-x-6 text-lg" id="desktop-nav-links">
                  <a href="#" class="nav-link">🏠 Home</a> 
                  <a href="#features" class="nav-link">✨ Features</a>
                  <a href="#games" class="nav-link">🎮 Games</a>
                  <a href="#commands" class="nav-link">⌨️ Commands</a>
-                 <a href="documentation.html" class="nav-link">📚 Documentation</a> 
-                 <a href="terms.html" class="nav-link">📜 ToS</a> 
-                 <a href="privacy.html" class="nav-link">🔒 Privacy</a> 
-                 <a href="#premium" class="nav-link">🌟 Premium</a>
+                 <a href="documentation.html" class="nav-link">📚 Docs</a> 
+                 <a href="#premium" class="nav-link">🌟 Exclusive</a>
             </div>
+            
+            <!-- Mobile Menu Button (Aligned to the right on small screens) -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-toggler" class="mobile-menu-button p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-label="Open main menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Links (hidden by default, appears below navbar) -->
+        <div class="hidden md:hidden mt-2 bg-opacity-90 bg-gray-800 rounded-b-lg shadow-lg" id="mobile-nav-links">
+            <a href="#" class="nav-link">🏠 Home</a> 
+            <a href="#features" class="nav-link">✨ Features</a>
+            <a href="#games" class="nav-link">🎮 Games</a>
+            <a href="#commands" class="nav-link">⌨️ Commands</a>
+            <a href="documentation.html" class="nav-link">📚 Docs</a> 
+            <a href="#premium" class="nav-link">🌟 Exclusive</a>
         </div>
     </nav>
 
+    <!-- Header Section -->
     <header class="section-dark py-20 md:py-32 text-white">
         <div class="container mx-auto px-6 text-center">
             <div class="logo-container mx-auto mb-8 w-24 h-24 md:w-32 md:h-32"> 
@@ -284,6 +334,7 @@
         </div>
     </header>
 
+    <!-- Features Section -->
     <section id="features" class="py-16 md:py-24"> 
         <div class="container mx-auto px-6 text-center"> 
             <h2 class="text-3xl md:text-4xl font-bold mb-16 section-title text-gradient">✨ Core Features ✨</h2>
@@ -328,6 +379,7 @@
         </div>
     </section>
 
+    <!-- Games Section -->
     <section id="games" class="py-16 md:py-24 section-dark">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-16 section-title text-gradient">🎮 A Universe of Games 🎮</h2>
@@ -342,7 +394,7 @@
                     <span class="text-4xl mb-2 block">♠️</span><p class="text-lg font-medium">Texas Hold'em</p>
                 </div>
                 <div class="game-item p-6 rounded-lg text-center" data-description="🔘 Button Search: Be the quickest! A grid of buttons appears, one is the winner. Click it first to earn a hefty XP reward." data-glow-color="rgba(156, 163, 175, 0.4)">
-                    <span class="text-4xl mb-2 block">🔘</span><p class="text-lg font-medium">Button Search</p>
+                    <span class="text-4xl mb-2 block">🔘</span><p class="text-lg font-medium">Button Search (Automated)</p>
                 </div>
                 <div class="game-item p-6 rounded-lg text-center" data-description="🔴 Connect 4: Line 'em up! Drop your pieces and try to get four in a row horizontally, vertically, or diagonally against an opponent." data-glow-color="rgba(239, 68, 68, 0.4)">
                     <span class="text-4xl mb-2 block">🔴</span><p class="text-lg font-medium">Connect 4</p>
@@ -368,6 +420,7 @@
         </div>
     </section>
 
+    <!-- Commands Section -->
     <section id="commands" class="py-16 md:py-24"> 
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title text-gradient">⌨️ Bot Commands ⌨️</h2>
@@ -461,6 +514,7 @@
         </div>
     </section>
 
+    <!-- Premium Section -->
     <section id="premium" class="py-16 md:py-24 section-dark"> 
         <div class="container mx-auto px-6 text-center"> 
             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-yellow-400"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -476,6 +530,7 @@
         </div>
     </section>
 
+    <!-- Footer Section -->
     <footer class="py-12 bg-gray-900 border-t border-gray-700">
         <div class="container mx-auto px-6 text-center">
             <p class="text-gray-400">© 2024-2025 XP DEPOT. All rights reserved.</p>
@@ -494,12 +549,12 @@
         </div>
     </footer>
 
+    <!-- JavaScript for sound effects, dynamic game descriptions, and mobile menu -->
     <script>
         // Tone.js Sound Synthesizer
         let uiHoverSynth; 
         let audioInitialized = false;
-        // Removed brandNameElement and originalBrandNameText as they are no longer needed for nav hover
-
+        
         function initializeAudio() {
             if (audioInitialized || typeof Tone === 'undefined') return;
             
@@ -512,9 +567,11 @@
             audioInitialized = true;
         }
 
+        // Initialize audio on first user interaction
         document.body.addEventListener('click', initializeAudio, { once: true });
         document.body.addEventListener('touchstart', initializeAudio, { once: true });
 
+        // Function to play UI hover sound
         function playUiHoverSound() {
             if (audioInitialized && uiHoverSynth) {
                 if (Tone.context.state !== 'running') {
@@ -525,14 +582,13 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Removed #brand-name-nav from this selector as it's gone from HTML
-            const hoverElements = document.querySelectorAll('.nav-link, .btn, .footer-link, .game-item, .feature-card, .command-item, .logo-container'); 
+            // Add hover sound to specified elements
+            const hoverElements = document.querySelectorAll('.nav-link, .btn, .footer-link, .game-item, .feature-card, .command-item, .logo-container, .mobile-menu-button'); 
             hoverElements.forEach(element => {
                 element.addEventListener('mouseenter', playUiHoverSound);
             });
 
-            // Brand name hover text change logic REMOVED
-
+            // Dynamic game description logic
             const gameDescriptionElement = document.getElementById('dynamic-game-description');
             if (gameDescriptionElement) { 
                 const originalGameDescriptionText = gameDescriptionElement.textContent;
@@ -561,6 +617,20 @@
                         }, 150);
                         item.style.boxShadow = ''; 
                     });
+                });
+            }
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-toggler');
+            const mobileNavLinks = document.getElementById('mobile-nav-links');
+            // const desktopNavLinks = document.getElementById('desktop-nav-links'); // Not needed for this centering logic
+
+            if (mobileMenuButton && mobileNavLinks) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenuButton.classList.toggle('open');
+                    mobileNavLinks.classList.toggle('hidden');
                 });
             }
         });
